@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hiralal Choudhary Website</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            background: #f2f4f7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        #page2, #page3 {
+            display: none;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        #openHome {
+            background: #ffcc00;
+            margin-top: 20px;
+        }
+
+        /* The Prank Button */
+        #openBtn {
+            background: #ffcc00;
+            position: absolute;
+            z-index: 100;
+        }
+
+        #backHome {
+            margin-top: 80px;
+            background: #333;
+            color: white;
+            padding: 12px 25px;
+            display: inline-block;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        video {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+        }
+
+        h1, h2, h3, p {
+            margin: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="page1">
+    <br>
+    <h1>HS First Year</h1>
+    <h2>Final Examination 2025-26</h2>
+    <br>
+    <p>ALL SUBJECT QUESTION PAPERS</p>
+    <br>
+    <button id="openHome">Click to Open</button>
+</div>
+
+<div id="page2">
+    <h1>HS FIRST YEAR</h1>
+    <p><strong>PRAGJYOTISH COLLEGE</strong></p>
+    <h2 id="paperText">QUESTION PAPER 2025-26</h2>
+    
+    <button id="openBtn">OPEN</button>
+
+    <div id="backHome">Back to Home</div>
+    <p id="backMsg"></p>
+    <h3 style="color:red; margin-top:100px;">Try to click OPEN 5 times!</h3>
+</div>
+
+<div id="page3">
+    <h1>GOTCHA!</h1>
+    <p></p>Website created by Hiralal Choudhary</p>
+    
+    <video controls>
+        <source src="video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    
+    <br><br>
+    <button onclick="goHome()" style="background:#000; color:#fff;">Back to Start</button>
+</div>
+
+<audio id="sound" src="click.mp3"></audio>
+
+<script>
+    let count = 0;
+    const openBtn = document.getElementById("openBtn");
+    const sound = document.getElementById("sound");
+
+    // PAGE 1 to PAGE 2
+    document.getElementById("openHome").onclick = function() {
+        document.getElementById("page1").style.display = "none";
+        document.getElementById("page2").style.display = "block";
+    }
+
+    // PRANK LOGIC (Moves on Click/Touch)
+    openBtn.onclick = function() {
+        count++;
+        sound.play();
+
+        // Randomly move the button
+        let x = Math.random() * 70; // 70% of width
+        let y = Math.random() * 70; // 70% of height
+        
+        openBtn.style.left = x + "%";
+        openBtn.style.top = y + "%";
+
+        // After 5 attempts, show the surprise
+        if (count >= 6) {
+            document.getElementById("page2").style.display = "none";
+            document.getElementById("page3").style.display = "block";
+        }
+    }
+
+    // BACK BUTTON LOGIC
+    document.getElementById("backHome").onclick = function() {
+        document.getElementById("backMsg").innerText = "Sorry, I am just a decoration!";
+    }
+
+    // RESET TO HOME
+    function goHome() {
+        count = 0; // Reset prank count
+        document.getElementById("page3").style.display = "none";
+        document.getElementById("page1").style.display = "block";
+        // Reset button position
+        openBtn.style.position = "absolute";
+        openBtn.style.left = "";
+        openBtn.style.top = "";
+    }
+</script>
+
+</body>
+</html>
